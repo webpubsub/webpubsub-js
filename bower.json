@@ -1,0 +1,19 @@
+{
+  "name": "webpubsub-js",
+  "location": "git://github.com/webpubsub/webpubsub-js.git",
+  "description": "Webpubsub JavaScript library for browsers, React Native, NodeJS and web workers",
+  "keywords": [
+    "webpubsub",
+    "client",
+    "websocket",
+    "http",
+    "fallback",
+    "isomorphic",
+    "events",
+    "pubsub"
+  ],
+  "licence": "MIT",
+  "authors": ["Webpubsub <support@webpubsub.com>"],
+  "main": "./dist/web/webpubsub.js",
+  "ignore": ["**/*", "!/dist/**/*", "!LICENCE", "!README.markdown", "!bower.json", "!CHANGELOG.markdown"]
+}

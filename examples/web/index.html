@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script src="../../dist/web/webpubsub.js"></script>
+        <script>
+            // 默认重连两次 lives = 2
+            var webpubsub = new Webpubsub("app_key111", {
+                // cluster: "APP_CLUSTER",
+                enabledTransports: ['ws'],
+                wsHost: "localhost",
+                wsPort: 11443,
+                forceTLS: false,
+            });
+
+            webpubsub.connection.bind( 'error', function( err ) {
+                console.error('connection error: ', err)
+                if( err.data.code === 4004 ) {
+                    log('Over limit!');
+                }
+            });
+
+            webpubsub.connection.bind('state_change', function(states) {
+                console.log("Channels current state is " + states.current)
+                if (states.current === 'failed') {
+                    webpubsub.re
+                }
+            });
+            webpubsub.connection.bind('connected', function(e) {
+                console.log("connected", e)
+            });
+
+            const channel = webpubsub.subscribe('my-channel');
+            channel.bind('webpubsub:subscription_succeeded', function(e) {
+                console.log('webpubsub:subscription_succeeded', e)
+            });
+            
+            channel.bind('haha', function(event) {
+                console.log('haha event: ', event)
+            });
+
+            channel.bind('client-message', function(event) {
+                console.log('client-message event: ', event)
+            });
+
+            window.onload = function() {
+                var sendBtn = document.getElementById("sendBtn");
+                sendBtn.onclick = function(e) {
+                    var text = document.getElementById("text");
+                    channel.trigger('client-message', {
+                        message: text.value
+                    });              
+                };
+            };
+        </script>
+    </head>
+    <body>
+        <input id="text" value="你好"/>
+        <button id="sendBtn">发送</button>
+    </body>
+</html>

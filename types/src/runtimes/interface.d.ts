@@ -1,0 +1,42 @@
+import { AuthTransports } from '../core/auth/auth_transports';
+import { Config } from '../core/config';
+import Ajax from '../core/http/ajax';
+import HTTPFactory from '../core/http/http_factory';
+import HTTPRequest from '../core/http/http_request';
+import Reachability from '../core/reachability';
+import Socket from '../core/socket';
+import Strategy from '../core/strategies/strategy';
+import StrategyOptions from '../core/strategies/strategy_options';
+import TimelineTransport from '../core/timeline/timeline_transport';
+import TransportsTable from '../core/transports/transports_table';
+import Webpubsub from '../core/webpubsub';
+import JSONPRequest from './web/dom/jsonp_request';
+interface Runtime {
+    setup(WebpubsubClass: {
+        new (key: string, options: any): Webpubsub;
+        ready(): void;
+    }): void;
+    getProtocol(): string;
+    getAuthorizers(): AuthTransports;
+    getLocalStorage(): any;
+    TimelineTransport: TimelineTransport;
+    createXHR(): Ajax;
+    createWebSocket(url: string): Socket;
+    getNetwork(): Reachability;
+    getDefaultStrategy(config: Config, options: StrategyOptions, defineTransport: Function): Strategy;
+    Transports: TransportsTable;
+    getWebSocketAPI(): new (url: string) => Socket;
+    getXHRAPI(): new () => Ajax;
+    addUnloadListener(listener: Function): void;
+    removeUnloadListener(listener: Function): void;
+    transportConnectionInitializer: Function;
+    HTTPFactory: HTTPFactory;
+    isXHRSupported(): boolean;
+    createSocketRequest(method: string, url: string): HTTPRequest;
+    getDocument?(): Document;
+    createScriptRequest?(url: string): any;
+    createJSONPRequest?(url: string, data: any): JSONPRequest;
+    ScriptReceivers?: any;
+    isXDRSupported?(useTLS?: boolean): boolean;
+}
+export default Runtime;

@@ -1,0 +1,24 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/mac1/workspace/webpubsub-js'
+echo "Browser Release:"
+MINIMIZE=false node_modules/webpack/bin/webpack.js --config=webpack/config.web.js
+echo "Browser Release (with encryption)"
+INCLUDE_TWEETNACL=true MINIMIZE=false node_modules/webpack/bin/webpack.js --config=webpack/config.web.js
+echo "Minified Browser Release:"
+node_modules/webpack/bin/webpack.js --config=webpack/config.web.js
+echo "Minified Browser Release (with encryption)"
+INCLUDE_TWEETNACL=true node_modules/webpack/bin/webpack.js --config=webpack/config.web.js
+echo "React Native Release:"
+node_modules/webpack/bin/webpack.js --config=webpack/config.react-native.js
+echo "NodeJS Release":
+MINIMIZE=false node_modules/webpack/bin/webpack.js --config=webpack/config.node.js
+echo "Web Worker Release"
+MINIMIZE=false node_modules/webpack/bin/webpack.js --config=webpack/config.worker.js
+echo "Web Worker Release (with encryption)"
+INCLUDE_TWEETNACL=true MINIMIZE=false node_modules/webpack/bin/webpack.js --config=webpack/config.worker.js
+echo "Minified Web Worker Release"
+node_modules/webpack/bin/webpack.js --config=webpack/config.worker.js
+echo "Minified Web Worker Release (with encryption)"
+INCLUDE_TWEETNACL=true node_modules/webpack/bin/webpack.js --config=webpack/config.worker.js
+make: Leaving directory `/Users/mac1/workspace/webpubsub-js'
+ 

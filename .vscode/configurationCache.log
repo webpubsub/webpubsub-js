@@ -1,0 +1,1 @@
+{"buildTargets":["build_all","json2","make","node","node_integration","node_unit","react-native","serve","web","web_integration","web_unit","worker","worker_integration","worker_unit"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
